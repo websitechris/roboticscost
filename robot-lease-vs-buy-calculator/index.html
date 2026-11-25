@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robot lease vs buy calculator (and robotics as a service)</title>
+<meta name="description" content="Free calculator comparing buying, leasing and paying per result for a robot in today&#x27;s money: cost per hour, break-even use and the lease&#x27;s real interest rate.">
+<link rel="canonical" href="https://roboticscost.com/robot-lease-vs-buy-calculator/">
+<meta property="og:title" content="Robot lease vs buy calculator (and robotics as a service)">
+<meta property="og:description" content="Free calculator comparing buying, leasing and paying per result for a robot in today&#x27;s money: cost per hour, break-even use and the lease&#x27;s real interest rate.">
+<meta property="og:url" content="https://roboticscost.com/robot-lease-vs-buy-calculator/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Robot lease vs buy calculator", "url": "https://roboticscost.com/robot-lease-vs-buy-calculator/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head>
+<body>
+<header class="site-head"><div class="wrap"><a class="brand" href="/">robotics<span>cost</span></a><nav class="site-nav" aria-label="Main"><a href="/robot-lease-vs-buy-calculator/" aria-current="page">Calculator</a><a href="/robotics-as-a-service/">Robotics as a service</a><a href="/how-we-calculate/">How we calculate</a></nav></div></header>
+<main class="wrap">
+<h1>Robot lease vs buy calculator</h1>
+<p class="lede">Compare buying a robot, leasing it, or paying per result (robotics as a service) on one fair basis: what each costs in today's money over the same period. The figures below are a worked example. Replace them with your own quotes.</p>
+
+<div class="calc">
+  <form class="inputs" id="calc-form" novalidate>
+    <fieldset>
+      <legend>Your situation</legend>
+      <div class="field">
+        <label for="currency">Currency</label>
+        <select id="currency">
+          <option value="$">$ dollar</option>
+          <option value="£">£ pound</option>
+          <option value="€">€ euro</option>
+          <option value="A$">A$ Australian dollar</option>
+          <option value="C$">C$ Canadian dollar</option>
+          <option value="₹">₹ rupee</option>
+        </select>
+        <span class="hint">Changes the symbol only. No exchange rates are applied.</span>
+      </div>
+      <div class="field">
+        <label for="termYears">Comparison period</label>
+        <div class="affix"><input id="termYears" data-key="termYears" type="number" inputmode="decimal" min="1" max="15" step="1" value="5"><span class="post">years</span></div>
+        <span class="hint">All three options are judged over this period. The lease runs for the same length.</span>
+      </div>
+      <div class="field">
+        <label for="hoursPerYear">Hours the robot works each year</label>
+        <div class="affix"><input id="hoursPerYear" data-key="hoursPerYear" type="number" inputmode="decimal" min="1" max="8760" step="50" value="2000"><span class="post">hours</span></div>
+        <div class="chips" aria-label="Quick picks for hours">
+          <button type="button" data-hours="2000">1 shift</button>
+          <button type="button" data-hours="4000">2 shifts</button>
+          <button type="button" data-hours="6000">3 shifts</button>
+          <button type="button" data-hours="8760">24/7</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="costOfCapital">Your cost of capital</label>
+        <div class="affix"><input id="costOfCapital" data-key="costOfCapital" data-pct type="number" inputmode="decimal" min="0" max="99" step="0.5" value="10"><span class="post">% a year</span></div>
+        <span class="hint">What your money costs you: your borrowing rate, or the return you expect on cash.</span>
+      </div>
+      <div class="field adv" hidden>
+        <label for="tasksPerHour">Tasks per hour (optional)</label>
+        <div class="affix"><input id="tasksPerHour" data-key="tasksPerHour" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 120"><span class="post">per hour</span></div>
+        <span class="hint">Picks, parts, square metres cleaned. Gives a cost per task.</span>
+      </div>
+      <div class="field adv" hidden>
+        <label for="labourPerHour">Labour cost per hour the robot saves (optional)</label>
+        <div class="affix"><span class="pre cur">$</span><input id="labourPerHour" data-key="labourPerHour" type="number" inputmode="decimal" min="0" step="0.5" placeholder="e.g. 22"></div>
+        <span class="hint">Your own estimate. Used only for payback. We don't assume one robot replaces one worker.</span>
+      </div>
+      <div class="field adv" hidden>
+        <label for="taxRate">Business tax rate (optional)</label>
+        <div class="affix"><input id="taxRate" data-key="taxRate" data-pct type="number" inputmode="decimal" min="0" max="99" step="1" placeholder="0"><span class="post">%</span></div>
+        <span class="hint">Leave at 0 for a pre-tax comparison. See how we handle tax on the method page.</span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="swatch sw-buy"></span>Buy</legend>
+      <div class="field">
+        <label for="price">Purchase price (robot and tooling)</label>
+        <div class="affix"><span class="pre cur">$</span><input id="price" data-key="price" type="number" inputmode="decimal" min="0" step="500" value="50000"></div>
+      </div>
+      <div class="field">
+        <label for="integrationPct">Integration and set-up, one-off</label>
+        <div class="affix"><input id="integrationPct" data-key="integrationPct" data-pct type="number" inputmode="decimal" min="0" step="1" value="25"><span class="post">% of price</span></div>
+        <span class="hint">Installation, programming, guarding, training. Often missing from quotes.</span>
+      </div>
+      <div class="field">
+        <label for="maintenancePct">Maintenance and service each year</label>
+        <div class="affix"><input id="maintenancePct" data-key="maintenancePct" data-pct type="number" inputmode="decimal" min="0" step="0.5" value="8"><span class="post">% of price</span></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="softwarePerYear">Software, licences and consumables each year</label>
+        <div class="affix"><span class="pre cur">$</span><input id="softwarePerYear" data-key="softwarePerYear" type="number" inputmode="decimal" min="0" step="100" value="1500"></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="insurancePct">Insurance each year</label>
+        <div class="affix"><input id="insurancePct" data-key="insurancePct" data-pct type="number" inputmode="decimal" min="0" step="0.1" value="1"><span class="post">% of price</span></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="downtimePct">Unplanned downtime</label>
+        <div class="affix"><input id="downtimePct" data-key="downtimePct" data-pct type="number" inputmode="decimal" min="0" max="99" step="0.5" value="3"><span class="post">% of hours</span></div>
+        <span class="hint">Applies to buying and leasing. Pay per result is protected by its uptime guarantee.</span>
+      </div>
+      <div class="field adv" hidden>
+        <label for="resalePct">Resale value at the end</label>
+        <div class="affix"><input id="resalePct" data-key="resalePct" data-pct type="number" inputmode="decimal" min="0" max="100" step="1" value="20"><span class="post">% of price</span></div>
+        <span class="hint">A guess, and often the deciding number. Try a few values.</span>
+      </div>
+      <div class="field adv" hidden>
+        <label for="grant">Grant or subsidy towards the purchase</label>
+        <div class="affix"><span class="pre cur">$</span><input id="grant" data-key="grant" type="number" inputmode="decimal" min="0" step="500" value="0"></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="firstYearWriteOffPct">Share written off for tax in year one</label>
+        <div class="affix"><input id="firstYearWriteOffPct" data-key="firstYearWriteOffPct" data-pct type="number" inputmode="decimal" min="0" max="100" step="5" value="100"><span class="post">%</span></div>
+        <span class="hint">100% where full expensing applies. The rest is spread evenly over the later years. Only used if you enter a tax rate.</span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="swatch sw-lease"></span>Lease</legend>
+      <div class="field">
+        <label for="leasePayment">Monthly lease payment</label>
+        <div class="affix"><span class="pre cur">$</span><input id="leasePayment" data-key="leasePayment" type="number" inputmode="decimal" min="0" step="10" value="980"></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="leaseFees">Up-front fees</label>
+        <div class="affix"><span class="pre cur">$</span><input id="leaseFees" data-key="leaseFees" type="number" inputmode="decimal" min="0" step="50" value="500"></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="leaseInAdvance">When payments fall</label>
+        <select id="leaseInAdvance" data-key="leaseInAdvance" data-bool>
+          <option value="true">Start of each month (in advance)</option>
+          <option value="false">End of each month (in arrears)</option>
+        </select>
+      </div>
+      <div class="field adv" hidden>
+        <label for="leaseEnd">At the end of the lease</label>
+        <select id="leaseEnd" data-key="leaseEnd">
+          <option value="buyout">You buy the robot for a set price</option>
+          <option value="return">You hand the robot back</option>
+        </select>
+      </div>
+      <div class="field adv" hidden>
+        <label for="leaseBuyout">Buy-out price</label>
+        <div class="affix"><span class="pre cur">$</span><input id="leaseBuyout" data-key="leaseBuyout" type="number" inputmode="decimal" min="0" step="1" value="1"></div>
+        <span class="hint">Often a nominal 1. A "fair market value" buy-out costs about the resale value.</span>
+      </div>
+      <label class="check adv" hidden><input type="checkbox" id="leaseIncludesMaintenance" data-key="leaseIncludesMaintenance"> Maintenance is included in the lease</label>
+      <label class="check adv" hidden><input type="checkbox" id="leaseIntegrationByYou" data-key="leaseIntegrationByYou" checked> You pay integration separately</label>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="swatch sw-raas"></span>Pay per result</legend>
+      <div class="field">
+        <label for="raasBasis">How the provider charges</label>
+        <select id="raasBasis" data-key="raasBasis">
+          <option value="month">A fixed fee each month</option>
+          <option value="hour">Per hour the robot works</option>
+          <option value="task">Per task completed</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="raasPrice" id="raasPriceLabel">Monthly fee</label>
+        <div class="affix"><span class="pre cur">$</span><input id="raasPrice" data-key="raasPrice" type="number" inputmode="decimal" min="0" step="any" value="1800"></div>
+        <span class="hint">Usually includes maintenance, software and insurance.</span>
+      </div>
+      <div class="field adv" hidden>
+        <label for="raasSetupFee">Set-up fee</label>
+        <div class="affix"><span class="pre cur">$</span><input id="raasSetupFee" data-key="raasSetupFee" type="number" inputmode="decimal" min="0" step="100" value="2000"></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="raasMinMonths">Minimum contract</label>
+        <div class="affix"><input id="raasMinMonths" data-key="raasMinMonths" type="number" inputmode="decimal" min="0" step="1" value="12"><span class="post">months</span></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="raasEscalatorPct">Yearly price rise</label>
+        <div class="affix"><input id="raasEscalatorPct" data-key="raasEscalatorPct" data-pct type="number" inputmode="decimal" min="0" step="0.5" value="3"><span class="post">%</span></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="raasUptimePct">Uptime guarantee</label>
+        <div class="affix"><input id="raasUptimePct" data-key="raasUptimePct" data-pct type="number" inputmode="decimal" min="0" max="100" step="0.5" value="95"><span class="post">%</span></div>
+      </div>
+    </fieldset>
+
+    <label class="toggle"><input type="checkbox" id="showAdvanced"> Show advanced inputs</label>
+    <button type="button" class="reset" id="resetBtn">Reset to the example figures</button>
+  </form>
+
+  <section class="results" aria-live="polite" aria-label="Results">
+    <div id="errors" class="errors" hidden></div>
+    <div class="verdict" id="verdict"></div>
+    <div class="routes" id="routes"></div>
+    <div class="panel" id="leasePanel"></div>
+    <div class="panel" id="flipsPanel"></div>
+    <div class="panel">
+      <h3>Cost per working hour at different levels of use</h3>
+      <p class="muted" id="hoursNote"></p>
+      <div class="legend"><span><i class="swatch sw-buy"></i>Buy</span><span><i class="swatch sw-lease"></i>Lease</span><span><i class="swatch sw-raas"></i>Pay per result</span></div>
+      <svg class="chart" id="hoursChart" viewBox="0 0 640 300" role="img" aria-label="Cost per working hour against hours of use a year"></svg>
+    </div>
+    <div class="panel">
+      <h3>Cash out each year</h3>
+      <p class="muted">Year 0 is day one. Negative figures are money coming back, such as resale or tax relief.</p>
+      <div class="legend"><span><i class="swatch sw-buy"></i>Buy</span><span><i class="swatch sw-lease"></i>Lease</span><span><i class="swatch sw-raas"></i>Pay per result</span></div>
+      <svg class="chart" id="yearChart" viewBox="0 0 640 300" role="img" aria-label="Cash out each year for each option"></svg>
+      <details><summary>Show the figures</summary><div class="table-scroll" id="yearTable"></div></details>
+    </div>
+    <div class="panel" id="paybackPanel" hidden></div>
+  </section>
+</div>
+
+<div class="article" style="margin-top:48px">
+  <h2>How to read the result</h2>
+  <p>The main figure is the <strong>cost in today's money</strong>, also called net present value. A payment in year five costs you less than the same payment today, because you keep the money working in the meantime. Your cost of capital sets how much less. Adding up the cash instead flatters any option that pushes payments later.</p>
+  <p><strong>Cost per working hour</strong> spreads that figure evenly over the years and divides by the hours the robot actually works, after downtime. It is the fairest single number for comparing with a wage or a quote priced by the hour.</p>
+
+  <h2>Robot leasing: the questions to ask</h2>
+  <p>A lease is a loan in a different form. The provider buys the robot and you repay it monthly, with interest built in. Quotes usually show the payment and leave out the rate. The calculator works the rate out for you, including fees and payment timing.</p>
+  <ul>
+    <li><strong>What is the interest rate?</strong> Compare it with what your bank would charge to lend you the same money.</li>
+    <li><strong>What happens at the end?</strong> A nominal buy-out leaves the robot with you. Handing it back means the provider keeps its resale value, which is part of what you paid for.</li>
+    <li><strong>Who pays for maintenance, insurance and integration?</strong> They are rarely in the monthly figure.</li>
+    <li><strong>Can you end it early, and at what cost?</strong></li>
+  </ul>
+
+  <h2>What sellers rarely mention</h2>
+  <ul>
+    <li><strong>Hours of use decide most cases.</strong> Return-on-investment examples often assume two or three shifts. Try one shift and see what changes.</li>
+    <li><strong>The robot is only part of the bill.</strong> Integration, tooling, guarding and training can add a large share again.</li>
+    <li><strong>Resale value is uncertain.</strong> Robots lose value as newer models arrive. Test a low figure.</li>
+    <li><strong>Pay-per-result contracts have small print.</strong> Check yearly price rises, minimum terms, usage caps and exit fees.</li>
+    <li><strong>Flexibility has value the numbers can't show.</strong> Paying per result lets you walk away when the technology moves on. Decide what that is worth to you.</li>
+  </ul>
+  <p>Read more about <a href="/robotics-as-a-service/">robotics as a service</a>, or see exactly <a href="/how-we-calculate/">how we calculate</a>, including the sources for the example figures.</p>
+</div>
+
+</main>
+<footer class="site-foot"><div class="wrap">
+<nav aria-label="Footer"><a href="/robot-lease-vs-buy-calculator/">Calculator</a><a href="/robotics-as-a-service/">Robotics as a service</a><a href="/how-we-calculate/">How we calculate</a><a href="/privacy/">Privacy</a></nav>
+<p>Independent and neutral. No maker, lessor or provider pays us. Figures are illustrations, not advice. Updated 2026-11-25.</p>
+</div></footer>
+<script src="/assets/calc-core.js"></script>
+<script src="/assets/calc-ui.js"></script>
+</body>
+</html>
