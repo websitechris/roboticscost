@@ -248,6 +248,17 @@
     });
     render();
   });
+  // Prefill from the link, e.g. ?taxRate=21&firstYearWriteOffPct=100 (values as typed in the form).
+  try {
+    var params = new URLSearchParams(location.search), advNeeded = false;
+    params.forEach(function (v, k) {
+      var f = $(k);
+      if (!f || !form.contains(f) || f.id === 'showAdvanced' || !/^[\w.$-]{1,20}$/.test(v)) return;
+      if (f.type === 'checkbox') f.checked = v === 'true'; else f.value = v;
+      if (f.closest('.adv')) advNeeded = true;
+    });
+    if (advNeeded) { $('showAdvanced').checked = true; setAdvanced(true); }
+  } catch (e) { /* old browser: ignore */ }
   form.addEventListener('input', render);
   form.addEventListener('change', render);
   form.addEventListener('submit', function (e) { e.preventDefault(); });
