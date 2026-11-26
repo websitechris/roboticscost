@@ -39,6 +39,21 @@
   </div>
   <p>Can you lease a Spot? Boston Dynamics has offered leases to developers, and publishes its <a href="https://bostondynamics.com/wp-content/uploads/2023/12/spot-terms-and-conditions-of-lease.pdf" target="_blank" rel="noopener">lease terms</a>, but no lease price. Early reports said a lease costs "about the price of a car" (<a href="https://thenextweb.com/news/boston-dynamics-makes-4-legged-robot-spot-available-for-lease-to-developers" target="_blank" rel="noopener">The Next Web, 2019</a>).</p>
 
+  <h2>UK prices</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Robot dog</th><th>UK price (inc VAT)</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Petoi Bittle X kit</strong></td><td>£257.54</td><td><a href="https://uk.robotshop.com/products/petoi-bittle-x-robot-dog-construction" target="_blank" rel="noopener">RobotShop UK, Nov 2026</a></td></tr>
+      <tr><td><strong>Unitree Go2 Air</strong></td><td>£2,199.98 (Scan) to £2,390.40 (RobotShop UK)</td><td><a href="https://www.scan.co.uk/shop/robotics/quadruped-dog-robots/unitree-go2" target="_blank" rel="noopener">Scan</a>, <a href="https://uk.robotshop.com/products/unitree-go2-air-robotic-dog-uk" target="_blank" rel="noopener">RobotShop UK</a></td></tr>
+      <tr><td><strong>Unitree Go2 Pro</strong></td><td>£3,119.99</td><td><a href="https://www.scan.co.uk/shop/robotics/quadruped-dog-robots/unitree-go2" target="_blank" rel="noopener">Scan, Nov 2026</a></td></tr>
+      <tr><td><strong>Unitree Go2 EDU</strong></td><td>£7,478.99 to £11,999.99 (with LiDAR)</td><td><a href="https://www.scan.co.uk/shop/robotics/quadruped-dog-robots/unitree-go2" target="_blank" rel="noopener">Scan, Nov 2026</a></td></tr>
+      <tr><td><strong>Boston Dynamics Spot</strong></td><td>£181,492 ex VAT, for a UK Atomic Energy Authority order of Spot with an arm and extras (not a list price)</td><td><a href="https://thestack.technology/how-much-does-boston-dynamics-spot-cost-uk/" target="_blank" rel="noopener">The Stack, 2022</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The calculator below works in any currency: type in pounds and read the answer in pounds.</p>
+
   <h2>What a robot dog really costs a year</h2>
   <p>The price tag is only part of it. Add repairs and batteries, take off what you could sell it for, and spread the rest over the years you keep it. Type in your own figures. The defaults are examples, not quotes.</p>
   <p>
@@ -46,16 +61,16 @@
     <button type="button" class="preset" data-price="74500" data-yrs="5" data-extra="5000" data-resale="20">Spot, example</button>
   </p>
   <form class="mini-calc" id="rd" onsubmit="return false">
-    <p><label>Price ($) <input type="number" id="rd-price" value="1600" min="0" step="10" inputmode="decimal"></label></p>
+    <p><label>Price <input type="number" id="rd-price" value="1600" min="0" step="10" inputmode="decimal"></label></p>
     <p><label>Years you will keep it <input type="number" id="rd-yrs" value="3" min="1" max="15" step="1" inputmode="numeric"></label></p>
-    <p><label>Repairs, batteries and software per year ($) <input type="number" id="rd-extra" value="100" min="0" step="10" inputmode="decimal"></label></p>
+    <p><label>Repairs, batteries and software per year <input type="number" id="rd-extra" value="100" min="0" step="10" inputmode="decimal"></label></p>
     <p><label>Resale value at the end (% of price) <input type="number" id="rd-resale" value="30" min="0" max="100" step="5" inputmode="decimal"></label></p>
   </form>
   <div class="result" id="rd-out" aria-live="polite"></div>
   <script>
   (function () {
     function $(id) { return document.getElementById(id); }
-    function money(x) { return '$' + Math.round(x).toLocaleString('en-US'); }
+    function money(x) { return Math.round(x).toLocaleString('en-US'); }
     var out = $('rd-out');
     function run() {
       var price = +$('rd-price').value || 0, yrs = +$('rd-yrs').value, extra = +$('rd-extra').value || 0, resale = +$('rd-resale').value || 0;

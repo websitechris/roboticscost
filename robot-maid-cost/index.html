@@ -36,6 +36,7 @@
     </tbody>
   </table>
   </div>
+  <p><strong>In the UK:</strong> the Roborock Saros Z70 sells for £1,499 (<a href="https://www.t3.com/home-living/vacuum-cleaners/roborock-saros-z70" target="_blank" rel="noopener">T3, Oct 2025</a>). We found no UK prices or UK launch dates for NEO, Isaac, Lume or onero yet. The calculator works in pounds too: just type in your own figures.</p>
   <p>Looking for humanoids such as Unitree or Tesla Optimus? See the <a href="/humanoid-robot-price/">humanoid robot price list</a>.</p>
 
   <h2>Buy, subscribe, or pay a cleaner?</h2>
@@ -45,18 +46,18 @@
     <button type="button" class="preset" data-buy="7999" data-fee="99" data-sub="449">Weave Isaac 1</button>
   </p>
   <form class="mini-calc" id="mc" onsubmit="return false">
-    <p><label>Price to buy ($) <input type="number" id="mc-buy" value="7999" min="0" step="100" inputmode="decimal"></label></p>
-    <p><label>Monthly fee if you buy ($) <input type="number" id="mc-fee" value="99" min="0" step="1" inputmode="decimal"></label></p>
-    <p><label>Subscription per month ($) <input type="number" id="mc-sub" value="449" min="0" step="1" inputmode="decimal"></label></p>
+    <p><label>Price to buy <input type="number" id="mc-buy" value="7999" min="0" step="100" inputmode="decimal"></label></p>
+    <p><label>Monthly fee if you buy <input type="number" id="mc-fee" value="99" min="0" step="1" inputmode="decimal"></label></p>
+    <p><label>Subscription per month <input type="number" id="mc-sub" value="449" min="0" step="1" inputmode="decimal"></label></p>
     <p><label>Years you would keep it <input type="number" id="mc-yrs" value="3" min="1" max="15" step="1" inputmode="numeric"></label></p>
-    <p><label>What you pay a cleaner a week, for the same jobs ($, optional) <input type="number" id="mc-clean" value="" min="0" step="5" inputmode="decimal" placeholder="Leave blank to skip"></label></p>
+    <p><label>What you pay a cleaner a week, for the same jobs (optional) <input type="number" id="mc-clean" value="" min="0" step="5" inputmode="decimal" placeholder="Leave blank to skip"></label></p>
   </form>
   <div class="result" id="mc-out" aria-live="polite"></div>
   <script>
   (function () {
     function $(id) { return document.getElementById(id); }
     var ids = ['mc-buy', 'mc-fee', 'mc-sub', 'mc-yrs', 'mc-clean'], out = $('mc-out');
-    function money(x) { return '$' + Math.round(x).toLocaleString('en-US'); }
+    function money(x) { return Math.round(x).toLocaleString('en-US'); }
     function run() {
       var buy = +$('mc-buy').value, fee = +$('mc-fee').value || 0, sub = +$('mc-sub').value, yrs = +$('mc-yrs').value, clean = $('mc-clean').value === '' ? null : +$('mc-clean').value;
       if (!(buy >= 0) || !(sub >= 0) || !(yrs >= 1)) { out.textContent = 'Enter a price, a subscription and the years you would keep it.'; return; }

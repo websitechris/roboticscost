@@ -38,6 +38,14 @@
   </table>
   </div>
 
+  <h2>Surgical robots in the NHS</h2>
+  <ul>
+    <li><strong>The plan:</strong> NHS England says 9 in 10 keyhole operations will be robot-assisted within 10 years, with half a million robot-supported operations a year by 2035 (<a href="https://england.nhs.uk/2025/06/millions-to-benefit-from-nhs-robot-drive" target="_blank" rel="noopener">NHS England, Jun 2025</a>).</li>
+    <li><strong>Which robots:</strong> NICE lets five soft-tissue systems be used while evidence is gathered: da Vinci SP, da Vinci X/Xi, Hugo, Senhance and Versius (<a href="https://www.nice.org.uk/guidance/HTE21/chapter/1-Recommendations" target="_blank" rel="noopener">NICE HTE21, Apr 2025</a>).</li>
+    <li><strong>Recent price:</strong> Torbay and South Devon put the cost of a new surgical robot at £1.3 million in June 2026, with its League of Friends paying 40% (<a href="https://www.torbayandsouthdevon.nhs.uk/about-us/news-and-publications/news/2026/06/significant-investment-in-robotic-technology-32213/" target="_blank" rel="noopener">Torbay and South Devon NHS, Jun 2026</a>).</li>
+  </ul>
+  <p>The cost per operation calculator below works in pounds too: enter the trust's own price and contract costs.</p>
+
   <h2>Buy, lease or pay per use?</h2>
   <ul>
     <li><strong>Intuitive (da Vinci)</strong> leases many of its systems. In the last quarter of 2024, 222 systems were placed on operating leases, 140 of them on usage-based leases where the hospital pays more the more it operates (<a href="https://www.sec.gov/Archives/edgar/data/1035267/000103526725000008/q424ex-991earningsrelease.htm" target="_blank" rel="noopener">Intuitive results, Jan 2025</a>). It does not publish lease prices.</li>
@@ -48,19 +56,19 @@
   <h2>Cost per operation calculator</h2>
   <p>Spread the price over the robot's working life, add the yearly contracts and the instruments for each case. The years and number of operations below are examples: use your own.</p>
   <form class="mini-calc" id="sg" onsubmit="return false">
-    <p><label>Price ($) <input type="number" id="sg-price" value="2500000" min="0" step="10000" inputmode="decimal"></label></p>
+    <p><label>Price <input type="number" id="sg-price" value="2500000" min="0" step="10000" inputmode="decimal"></label></p>
     <p><label>Years of use <input type="number" id="sg-yrs" value="7" min="1" max="20" step="1" inputmode="numeric"></label></p>
-    <p><label>Service contract per year ($) <input type="number" id="sg-svc" value="195000" min="0" step="1000" inputmode="decimal"></label></p>
-    <p><label>Software or subscription per year ($) <input type="number" id="sg-sub" value="70000" min="0" step="1000" inputmode="decimal"></label></p>
+    <p><label>Service contract per year <input type="number" id="sg-svc" value="195000" min="0" step="1000" inputmode="decimal"></label></p>
+    <p><label>Software or subscription per year <input type="number" id="sg-sub" value="70000" min="0" step="1000" inputmode="decimal"></label></p>
     <p><label>Operations per year <input type="number" id="sg-ops" value="300" min="1" step="10" inputmode="numeric"></label></p>
-    <p><label>Instruments per operation ($) <input type="number" id="sg-inst" value="1866" min="0" step="10" inputmode="decimal"></label></p>
+    <p><label>Instruments per operation <input type="number" id="sg-inst" value="1866" min="0" step="10" inputmode="decimal"></label></p>
   </form>
   <div class="result" id="sg-out" aria-live="polite"></div>
   <script>
   (function () {
     function $(id) { return document.getElementById(id); }
     function n(id) { return +$(id).value || 0; }
-    function money(x) { return '$' + Math.round(x).toLocaleString('en-US'); }
+    function money(x) { return Math.round(x).toLocaleString('en-US'); }
     var out = $('sg-out');
     function run() {
       var yrs = n('sg-yrs'), ops = n('sg-ops');

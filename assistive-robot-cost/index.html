@@ -45,7 +45,10 @@
       <tr><td><strong>US (California)</strong></td><td>Medi-Cal</td><td>Robot arms since 1 September 2024, if medically necessary.</td><td><a href="https://www.disabilityrightsca.org/publications/how-to-get-medi-cal-to-cover-an-assistive-robotic-arm" target="_blank" rel="noopener">Disability Rights California</a></td></tr>
       <tr><td><strong>US</strong></td><td>Private insurance, Medicaid, VA, TRICARE</td><td>Bionic arms such as the Hero Arm, case by case.</td><td><a href="https://openbionics.com/get-a-hero-arm/" target="_blank" rel="noopener">Open Bionics</a></td></tr>
       <tr><td><strong>UK</strong></td><td>NHS limb centres</td><td>Hero Arm for eligible adults and children with a below-elbow limb difference, after assessment and a trial.</td><td><a href="https://openbionics.com/en/nhs-policy/" target="_blank" rel="noopener">Open Bionics</a></td></tr>
-      <tr><td><strong>UK</strong></td><td>NHS personal wheelchair budget, Access to Work, local council</td><td>Equipment for daily living. Robot arms are decided locally.</td><td><a href="https://www.england.nhs.uk/personal-health-budgets/personal-wheelchair-budgets/frequently-asked-questions/" target="_blank" rel="noopener">NHS England</a></td></tr>
+      <tr><td><strong>UK</strong></td><td>NHS personal wheelchair budget, local council</td><td>Equipment for daily living. Robot arms are decided locally.</td><td><a href="https://www.england.nhs.uk/personal-health-budgets/personal-wheelchair-budgets/frequently-asked-questions/" target="_blank" rel="noopener">NHS England</a></td></tr>
+      <tr><td><strong>UK</strong></td><td>Access to Work</td><td>Equipment you need for your job: grants of up to £69,260 a year (April 2026 to March 2027).</td><td><a href="https://www.gov.uk/government/publications/access-to-work-factsheet/access-to-work-factsheet-for-customers" target="_blank" rel="noopener">gov.uk, May 2026</a></td></tr>
+      <tr><td><strong>UK</strong></td><td>VAT relief</td><td>Equipment designed solely for disabled people can be bought without VAT if you are eligible. General items such as computers do not qualify. Ask the supplier to confirm for a specific robot.</td><td><a href="https://www.gov.uk/guidance/reliefs-from-vat-for-disabled-and-older-people-notice-7017" target="_blank" rel="noopener">HMRC Notice 701/7</a></td></tr>
+      <tr><td><strong>UK</strong></td><td>Disabled Facilities Grant</td><td>Up to £30,000 in England (£36,000 Wales, £25,000 Northern Ireland) for changes to your home, not for equipment on its own.</td><td><a href="https://www.gov.uk/disabled-facilities-grants/what-youll-get" target="_blank" rel="noopener">gov.uk</a></td></tr>
       <tr><td><strong>Australia</strong></td><td>NDIS assistive technology</td><td>Items from A$1,500 to A$15,000 need an advisor. Over A$15,000 needs an assessor and maybe a trial first.</td><td><a href="https://ndis.gov.au/participants/assistive-technology/types-assistive-technology/what-mid-cost-or-high-cost-assistive-technology" target="_blank" rel="noopener">NDIS</a></td></tr>
       <tr><td><strong>Canada (Ontario)</strong></td><td>Assistive Devices Program</td><td>75% of wheelchairs and power add-ons. Robot arms are not listed.</td><td><a href="https://www.ontario.ca/page/mobility-aids" target="_blank" rel="noopener">Ontario government</a></td></tr>
     </tbody>
@@ -53,14 +56,14 @@
   </div>
 
   <h2>Your cost over the years</h2>
-  <p>Many assistive robots mix an upfront price with a monthly fee. Add both, take off what a scheme pays, and see the total.</p>
+  <p>Works in dollars or pounds. Many assistive robots mix an upfront price with a monthly fee. Add both, take off what a scheme pays, and see the total.</p>
   <p>
     <button type="button" class="preset" data-up="249" data-mo="59" data-cover="0">ElliQ, top plan</button>
     <button type="button" class="preset" data-up="12000" data-mo="0" data-cover="0">Obi, self-pay</button>
   </p>
   <form class="mini-calc" id="as" onsubmit="return false">
-    <p><label>Upfront price ($) <input type="number" id="as-up" value="249" min="0" step="1" inputmode="decimal"></label></p>
-    <p><label>Monthly fee ($) <input type="number" id="as-mo" value="59" min="0" step="1" inputmode="decimal"></label></p>
+    <p><label>Upfront price <input type="number" id="as-up" value="249" min="0" step="1" inputmode="decimal"></label></p>
+    <p><label>Monthly fee <input type="number" id="as-mo" value="59" min="0" step="1" inputmode="decimal"></label></p>
     <p><label>Years of use <input type="number" id="as-yrs" value="3" min="1" max="15" step="1" inputmode="numeric"></label></p>
     <p><label>Share a scheme or insurer pays (%) <input type="number" id="as-cover" value="0" min="0" max="100" step="5" inputmode="decimal"></label></p>
   </form>
@@ -68,7 +71,7 @@
   <script>
   (function () {
     function $(id) { return document.getElementById(id); }
-    function money(x) { return '$' + Math.round(x).toLocaleString('en-US'); }
+    function money(x) { return Math.round(x).toLocaleString('en-US'); }
     var out = $('as-out');
     function run() {
       var up = +$('as-up').value || 0, mo = +$('as-mo').value || 0, yrs = +$('as-yrs').value, cover = +$('as-cover').value || 0;
