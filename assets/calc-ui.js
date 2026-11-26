@@ -4,7 +4,7 @@
   var form = document.getElementById('calc-form');
   if (!form || !window.RobotCalc) return;
   var $ = function (id) { return document.getElementById(id); };
-  var ROUTES = ['buy', 'lease', 'raas'];
+  var ROUTES = ['buy', 'hp', 'lease', 'raas'];
   var NAMES = window.RobotCalc.ROUTE_NAMES;
   var cur = '$';
   var initial = {};
@@ -78,6 +78,7 @@
         x.costPerTask !== null ? ['Cost per task', fmt(x.costPerTask, 3)] : null,
         ['Yearly equivalent cost', fmt(x.eac)],
         ['Cash needed on day one', fmt(x.dayOne)],
+        k === 'hp' ? ['Monthly payment', fmt(r.hpPayment)] : k === 'lease' ? ['Monthly payment', fmt(o.leasePayment)] : null,
         ['Total cash over the period', fmt(x.totalCash)]
       ].filter(Boolean);
       return '<article class="route r-' + k + (win ? ' win' : '') + '"><h3>' + esc(x.name) + (win ? '<span class="badge">Lowest</span>' : '') + '</h3><dl>' +
@@ -97,7 +98,9 @@
           : diff < -0.005
             ? 'That is below your cost of capital of ' + pct(o.costOfCapital) + ', so the lease is cheap finance. Check what you give up for it.'
             : 'That is close to your cost of capital of ' + pct(o.costOfCapital) + ', so leasing is roughly the same as borrowing to buy.') + '</p>' +
-        '<p class="muted">Worked out from the price, payments, fees, payment timing and ' + (o.leaseEnd === 'buyout' ? 'the buy-out price' : 'the resale value you hand back with the robot') + '.</p>';
+        '<p class="muted">Worked out from the price, payments, fees, payment timing and ' + (o.leaseEnd === 'buyout' ? 'the buy-out price' : 'the resale value you hand back with the robot') + '. ' +
+        'Your hire purchase rate is ' + pct(o.hpRate) + (apr > o.hpRate + 0.0005 ? ', so hire purchase is the cheaper loan.' : apr < o.hpRate - 0.0005 ? ', so the lease is the cheaper loan.' : ', about the same.') +
+        ' Hire purchase also lets you claim any grant and the tax write-down, because you own the robot.</p>';
     }
 
     // What flips it
@@ -115,9 +118,10 @@
     // Hours chart note
     var hn = $('hoursNote');
     if (r.breakEvenHours) {
-      var b = r.breakEvenHours.buy, l = r.breakEvenHours.lease;
+      var b = r.breakEvenHours.buy, l = r.breakEvenHours.lease, h = r.breakEvenHours.hp;
       hn.textContent = 'Paying per ' + (o.raasBasis === 'hour' ? 'hour' : 'task') + ' gets dearer the more you use the robot. ' +
         (b ? 'Buying becomes cheaper above about ' + num(b) + ' hours a year. ' : 'Buying doesn\'t overtake it at any level of use. ') +
+        (h ? 'Hire purchase becomes cheaper above about ' + num(h) + ' hours. ' : '') +
         (l ? 'Leasing becomes cheaper above about ' + num(l) + ' hours.' : '');
     } else {
       hn.textContent = 'With a fixed monthly fee, more use lowers the cost per hour for every option, so the ranking doesn\'t depend on hours. Switch the pay-per-result charge to per hour to see a break-even point.';
@@ -158,7 +162,7 @@
     else s = a.toLocaleString('en-GB', { maximumFractionDigits: a < 10 ? 2 : 0 });
     return (v < 0 ? '−' : '') + cur + s;
   }
-  var COLORS = { buy: 'var(--buy)', lease: 'var(--lease)', raas: 'var(--raas)' };
+  var COLORS = { buy: 'var(--buy)', hp: 'var(--hp)', lease: 'var(--lease)', raas: 'var(--raas)' };
 
   function drawLines(svg, pts, nowHours) {
     svg.innerHTML = '';
@@ -206,9 +210,9 @@
       svg.appendChild(el('text', { x: L - 8, y: y(v) + 4, 'text-anchor': 'end' }, short(v)));
     }
     svg.appendChild(el('line', { x1: L, x2: W - R, y1: y(0), y2: y(0), 'class': 'axis' }));
-    var gw = (W - L - R) / years, bw = Math.min(22, (gw - 8) / 3);
+    var gw = (W - L - R) / years, bw = Math.min(18, (gw - 8) / 4);
     for (var yr = 0; yr < years; yr++) {
-      var gx = L + gw * yr + (gw - bw * 3) / 2;
+      var gx = L + gw * yr + (gw - bw * 4) / 2;
       ROUTES.forEach(function (k, j) {
         var v = r.routes[k].byYear[yr] || 0;
         var y0 = y(Math.max(0, v)), h = Math.abs(y(v) - y(0));

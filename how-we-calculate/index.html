@@ -18,7 +18,7 @@
 <header class="site-head"><div class="wrap"><a class="brand" href="/">robotics<span>cost</span></a><nav class="site-nav" aria-label="Main"><a href="/robot-lease-vs-buy-calculator/">Calculator</a><a href="/robotics-as-a-service/">Robotics as a service</a><a href="/how-we-calculate/" aria-current="page">How we calculate</a></nav></div></header>
 <main class="wrap">
 <h1>How we calculate</h1>
-<p class="lede">The calculator puts every payment for each option on a monthly timeline, converts it to today's money at your cost of capital, and compares the totals. Here is exactly how, and where the example figures come from.</p>
+<p class="lede">The calculator puts every payment for each of the four options on a monthly timeline, converts it to today's money at your cost of capital, and compares the totals. Here is exactly how, and where the example figures come from.</p>
 
 <div class="article" style="margin-top:28px">
   <h2>The method in five steps</h2>
@@ -27,7 +27,7 @@
     <li><strong>Discount them to today's money</strong> using your cost of capital, turned into a monthly rate. The result is the net present value (NPV) of the cost.</li>
     <li><strong>Rank the options</strong> by that figure. Lowest wins. If the top two are within 2% of each other, we say the result is too close to call.</li>
     <li><strong>Turn it into a yearly and an hourly figure.</strong> The yearly equivalent cost spreads the NPV evenly over the period. Dividing by working hours, after downtime, gives the cost per working hour.</li>
-    <li><strong>Test what would change the answer.</strong> We vary hours, resale value, cost of capital, price, lease payment, pay-per-result price and maintenance, and report the three nearest points at which a different option wins.</li>
+    <li><strong>Test what would change the answer.</strong> We vary hours, resale value, cost of capital, price, hire purchase rate, lease payment, pay-per-result price and maintenance, and report the three nearest points at which a different option wins.</li>
   </ol>
 
   <h2>Formulas</h2>
@@ -43,6 +43,7 @@
     <thead><tr><th>Option</th><th>Costs counted</th><th>Money back</th></tr></thead>
     <tbody>
       <tr><td><strong>Buy</strong></td><td>Price and integration on day one, less any grant. Maintenance, software and insurance each month.</td><td>Resale value at the end</td></tr>
+      <tr><td><strong>Hire purchase</strong></td><td>Deposit, integration and fees on day one, less any grant. Equal monthly payments in arrears at the interest rate you enter. Running costs as for buying. Option-to-purchase fee with the last payment.</td><td>Resale value at the end, because you own the robot</td></tr>
       <tr><td><strong>Lease</strong></td><td>Fees and integration on day one. Monthly payments, in advance or arrears. Running costs, less maintenance if the lease includes it. Buy-out price at the end, if you buy.</td><td>Resale value at the end, if you buy the robot</td></tr>
       <tr><td><strong>Pay per result</strong></td><td>Set-up fee. Monthly charge in advance, rising each year by the escalator, for the period or the minimum contract, whichever is longer. Maintenance, software and insurance are assumed included.</td><td>None</td></tr>
     </tbody>
@@ -50,7 +51,7 @@
   </div>
 
   <h2>Tax, without picking a country</h2>
-  <p>Tax rules differ by country, so we ask for two numbers instead of assuming one country's rules: your tax rate, and the share of the purchase you can write off in year one. The rest is written off evenly over the remaining years. Running costs, lease payments and pay-per-result fees are deducted in the year they are paid. Tax relief arrives at the end of each year. Resale proceeds are taxed at the end. Grants are treated as reducing the cost and as not taxable. This is a simplification. Check the real treatment with your accountant.</p>
+  <p>Tax rules differ by country, so we ask for two numbers instead of assuming one country's rules: your tax rate, and the share of the purchase you can write off in year one. The rest is written off evenly over the remaining years. Running costs, lease payments and pay-per-result fees are deducted in the year they are paid. With hire purchase you own the robot, so it gets the same write-down as buying outright, and only the interest part of each payment is deducted. A lease gets no write-down on the robot itself. Tax relief arrives at the end of each year. Resale proceeds are taxed at the end. Grants are treated as reducing the cost and as not taxable. This is a simplification. Check the real treatment with your accountant.</p>
 
   <h2>Where the example figures come from</h2>
   <p>The figures the calculator opens with are an illustration of a typical collaborative robot (cobot). They are not a quote. Replace them with your own.</p>
@@ -63,6 +64,7 @@
       <tr><td>Maintenance</td><td>8% of price a year</td><td>Our estimate. One maker puts extended warranties for typical robots at 10 to 14% of the purchase price (<a href="https://www.mecademic.com/knowledge_base/robots-total-cost-of-ownership-tco/" target="_blank" rel="noopener">Mecademic</a>).</td></tr>
       <tr><td>Lease payment</td><td>$980 a month for 5 years</td><td>Gives a rate of about 7.25%, in line with published fixed equipment-lease rates of about 6.75 to 7.45% for $5,000 to $100,000 (<a href="https://smallbiztrends.com/equipment-leasing-interest-rates/" target="_blank" rel="noopener">Small Business Trends, July 2026</a>). A 2022 US robot leasing scheme quoted $2,549 a month for a $130,000 robot over 60 months (<a href="https://www.robotics247.com/article/new_leasing_program_howtorobot_makes_robots_more_affordable/manufacturing" target="_blank" rel="noopener">Robotics 24/7</a>), about 7.4%.</td></tr>
       <tr><td>Pay-per-result fee</td><td>$1,800 a month</td><td>Our estimate for a cobot including support. Published RaaS prices start from $499 a month (<a href="https://www.robotlab.com/raas-guide/" target="_blank" rel="noopener">RobotLAB</a>), and $750 a month for a cleaning robot (<a href="https://www.issa.com/industry-news/pringle-robotics-announces-floor-cleaning-robot-rental-program/" target="_blank" rel="noopener">ISSA, April 2026</a>).</td></tr>
+      <tr><td>Hire purchase</td><td>10% deposit, 7.5% APR, $250 fees, $100 option fee</td><td>Our estimate. 7.5% sits just above published fixed equipment-finance rates of about 6.75 to 7.45% (<a href="https://smallbiztrends.com/equipment-leasing-interest-rates/" target="_blank" rel="noopener">Small Business Trends, July 2026</a>).</td></tr>
       <tr><td>Cost of capital</td><td>10% a year</td><td>Our estimate for a small or mid-sized firm. Use your own borrowing rate or required return.</td></tr>
       <tr><td>Resale value</td><td>20% after 5 years</td><td>Our estimate. We have not found a reliable published figure. Test a range.</td></tr>
       <tr><td>Downtime, insurance, software</td><td>3%, 1% of price, $1,500 a year</td><td>Our estimates.</td></tr>

@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Robot lease vs buy calculator (and robotics as a service)</title>
-<meta name="description" content="Free calculator comparing buying, leasing and paying per result for a robot in today&#x27;s money: cost per hour, break-even use and the lease&#x27;s real interest rate.">
+<meta name="description" content="Free calculator comparing buying, hire purchase, leasing and paying per result for a robot in today&#x27;s money: cost per hour, break-even use and the lease&#x27;s real interest rate.">
 <link rel="canonical" href="https://roboticscost.com/robot-lease-vs-buy-calculator/">
 <meta property="og:title" content="Robot lease vs buy calculator (and robotics as a service)">
-<meta property="og:description" content="Free calculator comparing buying, leasing and paying per result for a robot in today&#x27;s money: cost per hour, break-even use and the lease&#x27;s real interest rate.">
+<meta property="og:description" content="Free calculator comparing buying, hire purchase, leasing and paying per result for a robot in today&#x27;s money: cost per hour, break-even use and the lease&#x27;s real interest rate.">
 <meta property="og:url" content="https://roboticscost.com/robot-lease-vs-buy-calculator/">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -18,7 +18,7 @@
 <header class="site-head"><div class="wrap"><a class="brand" href="/">robotics<span>cost</span></a><nav class="site-nav" aria-label="Main"><a href="/robot-lease-vs-buy-calculator/" aria-current="page">Calculator</a><a href="/robotics-as-a-service/">Robotics as a service</a><a href="/how-we-calculate/">How we calculate</a></nav></div></header>
 <main class="wrap">
 <h1>Robot lease vs buy calculator</h1>
-<p class="lede">Compare buying a robot, leasing it, or paying per result (robotics as a service) on one fair basis: what each costs in today's money over the same period. The figures below are a worked example. Replace them with your own quotes.</p>
+<p class="lede">Compare buying a robot outright, hire purchase, leasing, or paying per result (robotics as a service) on one fair basis: what each costs in today's money over the same period. The figures below are a worked example. Replace them with your own quotes.</p>
 
 <div class="calc">
   <form class="inputs" id="calc-form" novalidate>
@@ -39,7 +39,7 @@
       <div class="field">
         <label for="termYears">Comparison period</label>
         <div class="affix"><input id="termYears" data-key="termYears" type="number" inputmode="decimal" min="1" max="15" step="1" value="5"><span class="post">years</span></div>
-        <span class="hint">All three options are judged over this period. The lease runs for the same length.</span>
+        <span class="hint">All four options are judged over this period. Hire purchase and the lease run for the same length.</span>
       </div>
       <div class="field">
         <label for="hoursPerYear">Hours the robot works each year</label>
@@ -114,6 +114,27 @@
         <label for="firstYearWriteOffPct">Share written off for tax in year one</label>
         <div class="affix"><input id="firstYearWriteOffPct" data-key="firstYearWriteOffPct" data-pct type="number" inputmode="decimal" min="0" max="100" step="5" value="100"><span class="post">%</span></div>
         <span class="hint">100% where full expensing applies. The rest is spread evenly over the later years. Only used if you enter a tax rate.</span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="swatch sw-hp"></span>Hire purchase</legend>
+      <div class="field">
+        <label for="hpDepositPct">Deposit</label>
+        <div class="affix"><input id="hpDepositPct" data-key="hpDepositPct" data-pct type="number" inputmode="decimal" min="0" max="100" step="1" value="10"><span class="post">% of price</span></div>
+      </div>
+      <div class="field">
+        <label for="hpRate">Interest rate (APR)</label>
+        <div class="affix"><input id="hpRate" data-key="hpRate" data-pct type="number" inputmode="decimal" min="0" max="99" step="0.1" value="7.5"><span class="post">% a year</span></div>
+        <span class="hint">You pay monthly over the comparison period and own the robot at the end. Integration is paid up front.</span>
+      </div>
+      <div class="field adv" hidden>
+        <label for="hpFees">Arrangement fees</label>
+        <div class="affix"><span class="pre cur">$</span><input id="hpFees" data-key="hpFees" type="number" inputmode="decimal" min="0" step="50" value="250"></div>
+      </div>
+      <div class="field adv" hidden>
+        <label for="hpOptionFee">Option-to-purchase fee at the end</label>
+        <div class="affix"><span class="pre cur">$</span><input id="hpOptionFee" data-key="hpOptionFee" type="number" inputmode="decimal" min="0" step="10" value="100"></div>
       </div>
     </fieldset>
 
@@ -196,13 +217,13 @@
     <div class="panel">
       <h3>Cost per working hour at different levels of use</h3>
       <p class="muted" id="hoursNote"></p>
-      <div class="legend"><span><i class="swatch sw-buy"></i>Buy</span><span><i class="swatch sw-lease"></i>Lease</span><span><i class="swatch sw-raas"></i>Pay per result</span></div>
+      <div class="legend"><span><i class="swatch sw-buy"></i>Buy</span><span><i class="swatch sw-hp"></i>Hire purchase</span><span><i class="swatch sw-lease"></i>Lease</span><span><i class="swatch sw-raas"></i>Pay per result</span></div>
       <svg class="chart" id="hoursChart" viewBox="0 0 640 300" role="img" aria-label="Cost per working hour against hours of use a year"></svg>
     </div>
     <div class="panel">
       <h3>Cash out each year</h3>
       <p class="muted">Year 0 is day one. Negative figures are money coming back, such as resale or tax relief.</p>
-      <div class="legend"><span><i class="swatch sw-buy"></i>Buy</span><span><i class="swatch sw-lease"></i>Lease</span><span><i class="swatch sw-raas"></i>Pay per result</span></div>
+      <div class="legend"><span><i class="swatch sw-buy"></i>Buy</span><span><i class="swatch sw-hp"></i>Hire purchase</span><span><i class="swatch sw-lease"></i>Lease</span><span><i class="swatch sw-raas"></i>Pay per result</span></div>
       <svg class="chart" id="yearChart" viewBox="0 0 640 300" role="img" aria-label="Cash out each year for each option"></svg>
       <details><summary>Show the figures</summary><div class="table-scroll" id="yearTable"></div></details>
     </div>
@@ -214,6 +235,9 @@
   <h2>How to read the result</h2>
   <p>The main figure is the <strong>cost in today's money</strong>, also called net present value. A payment in year five costs you less than the same payment today, because you keep the money working in the meantime. Your cost of capital sets how much less. Adding up the cash instead flatters any option that pushes payments later.</p>
   <p><strong>Cost per working hour</strong> spreads that figure evenly over the years and divides by the hours the robot actually works, after downtime. It is the fairest single number for comparing with a wage or a quote priced by the hour.</p>
+
+  <h2>Hire purchase or lease?</h2>
+  <p>Both spread the cost over monthly payments. The difference is ownership. With <strong>hire purchase</strong> you own the robot once the last payment is made, so you keep its resale value and can usually claim grants and the tax write-down for buying equipment. With a <strong>lease</strong> the provider owns it. Compare the two interest rates first, then what you get at the end.</p>
 
   <h2>Robot leasing: the questions to ask</h2>
   <p>A lease is a loan in a different form. The provider buys the robot and you repay it monthly, with interest built in. Quotes usually show the payment and leave out the rate. The calculator works the rate out for you, including fees and payment timing.</p>

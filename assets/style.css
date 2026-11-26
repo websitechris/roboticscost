@@ -11,6 +11,7 @@
   --buy: #1b5a96;
   --lease: #a8571a;
   --raas: #23775b;
+  --hp: #6a4c9c;
   --good-bg: #e6f2ec;
   --warn-bg: #fbf0e3;
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -20,13 +21,13 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #10151b; --surface: #18202a; --ink: #e7ecf1; --muted: #a8b5c2; --line: #2d3946;
-    --accent: #84b8ec; --accent-ink: #0c1a28; --buy: #84b8ec; --lease: #f0a463; --raas: #6fcaa5;
+    --accent: #84b8ec; --accent-ink: #0c1a28; --buy: #84b8ec; --lease: #f0a463; --raas: #6fcaa5; --hp: #bba3ea;
     --good-bg: #16302a; --warn-bg: #33261a; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #10151b; --surface: #18202a; --ink: #e7ecf1; --muted: #a8b5c2; --line: #2d3946;
-  --accent: #84b8ec; --accent-ink: #0c1a28; --buy: #84b8ec; --lease: #f0a463; --raas: #6fcaa5;
+  --accent: #84b8ec; --accent-ink: #0c1a28; --buy: #84b8ec; --lease: #f0a463; --raas: #6fcaa5; --hp: #bba3ea;
   --good-bg: #16302a; --warn-bg: #33261a; color-scheme: dark;
 }
 
@@ -85,7 +86,7 @@ pre.formula { background: var(--surface); border: 1px solid var(--line); border-
 .inputs fieldset { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 14px 16px 16px; display: grid; gap: 12px; min-width: 0; }
 .inputs legend { font-weight: 700; padding: 0 6px; display: flex; align-items: center; gap: 8px; }
 .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
-.sw-buy { background: var(--buy); } .sw-lease { background: var(--lease); } .sw-raas { background: var(--raas); }
+.sw-buy { background: var(--buy); } .sw-lease { background: var(--lease); } .sw-raas { background: var(--raas); } .sw-hp { background: var(--hp); }
 .field { display: grid; gap: 4px; }
 .field label { font-weight: 500; font-size: 0.95rem; }
 .field .hint { font-size: 0.82rem; color: var(--muted); }
@@ -116,8 +117,8 @@ pre.formula { background: var(--surface); border: 1px solid var(--line); border-
 .verdict .big { font-size: 1.4rem; font-weight: 700; line-height: 1.3; }
 .verdict .sub { color: var(--muted); }
 .errors { background: var(--warn-bg); border-radius: var(--radius); padding: 14px 16px; }
-.routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-@media (max-width: 640px) { .routes { grid-template-columns: minmax(0, 1fr); } }
+.routes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 560px) { .routes { grid-template-columns: minmax(0, 1fr); } }
 .route { background: var(--surface); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
 .route.win { box-shadow: 0 0 0 2px var(--c); }
 .route h3 { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
@@ -126,7 +127,7 @@ pre.formula { background: var(--surface); border: 1px solid var(--line); border-
 .route dt { font-size: 0.8rem; color: var(--muted); }
 .route dd { margin: 0; font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: 1.05rem; }
 .route dd.key { font-size: 1.35rem; font-weight: 700; }
-.r-buy { --c: var(--buy); } .r-lease { --c: var(--lease); } .r-raas { --c: var(--raas); }
+.r-buy { --c: var(--buy); } .r-lease { --c: var(--lease); } .r-raas { --c: var(--raas); } .r-hp { --c: var(--hp); }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 10px; min-width: 0; }
 .panel ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; }
 .panel .muted { color: var(--muted); font-size: 0.92rem; }

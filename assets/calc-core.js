@@ -27,6 +27,11 @@
     resalePct: 0.20,
     firstYearWriteOffPct: 1.0,
     grant: 0,
+    // Hire purchase
+    hpDepositPct: 0.10,
+    hpRate: 0.075,            // APR, nominal (monthly rate x 12)
+    hpFees: 250,
+    hpOptionFee: 100,         // option-to-purchase fee with the last payment
     // Lease
     leasePayment: 980,
     leaseFees: 500,
@@ -44,8 +49,8 @@
     raasUptimePct: 0.95
   };
 
-  var ROUTES = ['buy', 'lease', 'raas'];
-  var ROUTE_NAMES = { buy: 'Buy', lease: 'Lease', raas: 'Pay per result' };
+  var ROUTES = ['buy', 'hp', 'lease', 'raas'];
+  var ROUTE_NAMES = { buy: 'Buy', hp: 'Hire purchase', lease: 'Lease', raas: 'Pay per result' };
 
   function withDefaults(input) {
     var o = {};
@@ -109,6 +114,37 @@
     for (var m = 1; m <= N; m++) { f[m] += running; ded[m] += running; }
     var resale = o.price * o.resalePct;
     f[N] -= resale; inc[N] += resale;
+    applyTax(f, ded, allowances(capitalCost, o.firstYearWriteOffPct, o.termYears), inc, o.taxRate, o.termYears);
+    return f;
+  }
+
+  // Hire purchase: deposit now, equal monthly payments in arrears, you own the robot at the end.
+  function hpAmountFinanced(o) { return Math.max(0, o.price * (1 - o.hpDepositPct)); }
+  function hpPayment(o) {
+    var P = hpAmountFinanced(o), n = o.termYears * 12, r = o.hpRate / 12;
+    if (P === 0) return 0;
+    if (Math.abs(r) < 1e-12) return P / n;
+    return P * r / (1 - Math.pow(1 + r, -n));
+  }
+
+  function hpFlows(o) {
+    var N = o.termYears * 12, f = zeros(N + 1), ded = zeros(N + 1), inc = zeros(N + 1);
+    var integration = o.price * o.integrationPct;
+    var deposit = o.price * o.hpDepositPct;
+    // Same ownership as buying: grant and tax write-down apply to price + integration.
+    var capitalCost = Math.max(0, o.price + integration - o.grant);
+    f[0] = deposit + integration + o.hpFees - o.grant;
+    ded[0] += o.hpFees;
+    var pmt = hpPayment(o), bal = hpAmountFinanced(o), r = o.hpRate / 12;
+    for (var m = 1; m <= N; m++) {
+      var interest = bal * r;
+      bal -= pmt - interest;
+      f[m] += pmt; ded[m] += interest; // only the interest part is a deductible cost
+    }
+    var running = (o.price * o.maintenancePct + o.softwarePerYear + o.price * o.insurancePct) / 12;
+    for (var m2 = 1; m2 <= N; m2++) { f[m2] += running; ded[m2] += running; }
+    var resale = o.price * o.resalePct;
+    f[N] += o.hpOptionFee - resale; ded[N] += o.hpOptionFee; inc[N] += resale;
     applyTax(f, ded, allowances(capitalCost, o.firstYearWriteOffPct, o.termYears), inc, o.taxRate, o.termYears);
     return f;
   }
@@ -194,12 +230,13 @@
     if (!(o.costOfCapital >= 0 && o.costOfCapital < 1)) errors.push('Cost of capital must be between 0% and 100%.');
     if (o.raasBasis === 'task' && !(o.tasksPerHour > 0)) errors.push('Enter tasks per hour to price pay per result by the task.');
     if (o.downtimePct < 0 || o.downtimePct >= 1) errors.push('Downtime must be between 0% and 99%.');
+    if (!(o.hpDepositPct >= 0 && o.hpDepositPct <= 1)) errors.push('Hire purchase deposit must be between 0% and 100%.');
     if (o.firstYearWriteOffPct < 0 || o.firstYearWriteOffPct > 1) errors.push('First-year write-off must be between 0% and 100%.');
     return errors;
   }
 
   function core(o) {
-    var flows = { buy: buyFlows(o), lease: leaseFlows(o), raas: raasFlows(o) };
+    var flows = { buy: buyFlows(o), hp: hpFlows(o), lease: leaseFlows(o), raas: raasFlows(o) };
     var npv = {};
     ROUTES.forEach(function (r) { npv[r] = presentValue(flows[r], o.costOfCapital); });
     return { flows: flows, npv: npv };
@@ -243,6 +280,8 @@
       winner: ranked[0],
       margin: c.npv[ranked[1]] - c.npv[ranked[0]],
       leaseAPR: leaseAPR(o),
+      hpPayment: hpPayment(o),
+      hpDeposit: o.price * o.hpDepositPct,
       breakEvenHours: breakEvenHours(o),
       flips: whatFlips(o),
       hoursCurve: hoursCurve(o)
@@ -263,7 +302,7 @@
   function breakEvenHours(o) {
     if (o.raasBasis === 'month') return null;
     var out = {};
-    ['buy', 'lease'].forEach(function (r) {
+    ['buy', 'hp', 'lease'].forEach(function (r) {
       out[r] = bisect(function (h) {
         var x = withDefaults(o); x.hoursPerYear = h;
         var c = core(x); return c.npv[r] - c.npv.raas;
@@ -290,6 +329,7 @@
     { key: 'resalePct', label: 'resale value', lo: 0, hi: 0.9, kind: 'pct' },
     { key: 'costOfCapital', label: 'cost of capital', lo: 0, hi: 0.4, kind: 'pct' },
     { key: 'price', label: 'purchase price', lo: 0.2, hi: 4, kind: 'money', relative: true },
+    { key: 'hpRate', label: 'hire purchase interest rate', lo: 0, hi: 0.4, kind: 'pct' },
     { key: 'leasePayment', label: 'monthly lease payment', lo: 0.2, hi: 4, kind: 'money', relative: true },
     { key: 'raasPrice', label: 'pay-per-result price', lo: 0.2, hi: 4, kind: 'money', relative: true },
     { key: 'maintenancePct', label: 'yearly maintenance', lo: 0, hi: 0.4, kind: 'pct' }
@@ -336,6 +376,6 @@
     ROUTE_NAMES: ROUTE_NAMES,
     compute: compute,
     _internal: { presentValue: presentValue, annuityFactor: annuityFactor, leaseAPR: leaseAPR,
-      buyFlows: buyFlows, leaseFlows: leaseFlows, raasFlows: raasFlows, allowances: allowances, withDefaults: withDefaults }
+      buyFlows: buyFlows, hpFlows: hpFlows, hpPayment: hpPayment, leaseFlows: leaseFlows, raasFlows: raasFlows, allowances: allowances, withDefaults: withDefaults }
   };
 });
