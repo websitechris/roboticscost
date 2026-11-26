@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<header class="site-head"><div class="wrap"><a class="brand" href="/">robotics<span>cost</span></a><nav class="site-nav" aria-label="Main"><a href="/robot-lease-vs-buy-calculator/">Calculator</a><a href="/robotics-as-a-service/" aria-current="page">Robotics as a service</a><a href="/how-we-calculate/">How we calculate</a></nav></div></header>
+<header class="site-head"><div class="wrap"><a class="brand" href="/">robotics<span>cost</span></a><button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button><nav class="site-nav" id="site-nav" aria-label="Main"><div class="nav-item"><a href="/robot-lease-vs-buy-calculator/">Calculator</a></div><details class="nav-item nav-group"><summary>Home robots</summary><ul><li><a href="/humanoid-robot-price/">Humanoid robot prices</a></li><li><a href="/robot-maid-cost/">Robot maid and chore robots</a></li><li><a href="/robot-lawn-mower-cost/">Robot lawn mowers</a></li><li><a href="/robot-dog-price/">Robot dogs</a></li></ul></details><details class="nav-item nav-group is-current"><summary>Business</summary><ul><li><a href="/commercial-cleaning-robot-price/">Cleaning robot prices</a></li><li><a href="/rent-a-robot/">Rent a robot</a></li><li><a href="/robotics-as-a-service/" aria-current="page">Robotics as a service</a></li><li><a href="/surgical-robot-cost/">Surgical robots</a></li></ul></details><details class="nav-item nav-group"><summary>Health and care</summary><ul><li><a href="/exoskeleton-cost/">Exoskeletons</a></li><li><a href="/assistive-robot-cost/">Assistive robots</a></li></ul></details><details class="nav-item nav-group"><summary>Getting around</summary><ul><li><a href="/robotaxi-cost/">Robotaxi vs owning a car</a></li></ul></details><details class="nav-item nav-group"><summary>Tax guides</summary><ul><li><a href="/tax/us/">US: Section 179</a></li><li><a href="/tax/uk/">UK: full expensing and AIA</a></li><li><a href="/tax/australia/">Australia: instant asset write-off</a></li></ul></details><div class="nav-item"><a href="/how-we-calculate/">How we calculate</a></div></nav></div></header>
 <main class="wrap">
 <h1>Robotics as a service: how it's priced and when it pays</h1>
 <p class="lede">Robotics as a service (RaaS) means you rent a robot's work instead of owning the robot. You pay a fee per month, per hour or per task, and the provider usually handles maintenance, software and repairs.</p>
@@ -72,6 +72,25 @@
 <nav aria-label="Footer"><a href="/robot-lease-vs-buy-calculator/">Calculator</a><a href="/humanoid-robot-price/">Humanoid robot prices</a><a href="/robot-maid-cost/">Robot maid cost</a><a href="/robotaxi-cost/">Robotaxi cost</a><a href="/robot-lawn-mower-cost/">Robot lawn mower cost</a><a href="/exoskeleton-cost/">Exoskeleton cost</a><a href="/assistive-robot-cost/">Assistive robot cost</a><a href="/robot-dog-price/">Robot dog price</a><a href="/rent-a-robot/">Rent a robot</a><a href="/surgical-robot-cost/">Surgical robot cost</a><a href="/commercial-cleaning-robot-price/">Cleaning robot prices</a><a href="/tax/us/">US tax: Section 179</a><a href="/tax/uk/">UK tax: full expensing</a><a href="/tax/australia/">Australia: instant asset write-off</a><a href="/robotics-as-a-service/">Robotics as a service</a><a href="/how-we-calculate/">How we calculate</a><a href="/privacy/">Privacy</a></nav>
 <p>Independent and neutral. No maker, lessor or provider pays us. Figures are illustrations, not advice. Updated 2026-11-26.</p>
 </div></footer>
+<script>
+(function () {
+  var nav = document.getElementById('site-nav'), btn = document.getElementById('nav-toggle');
+  if (!nav || !btn) return;
+  btn.addEventListener('click', function () {
+    var open = btn.getAttribute('aria-expanded') !== 'true';
+    btn.setAttribute('aria-expanded', open); nav.classList.toggle('open', open);
+  });
+  var groups = nav.querySelectorAll('details');
+  groups.forEach(function (d) {
+    d.addEventListener('toggle', function () { if (d.open) groups.forEach(function (o) { if (o !== d) o.open = false; }); });
+  });
+  document.addEventListener('click', function (e) { if (!nav.contains(e.target)) groups.forEach(function (d) { d.open = false; }); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    groups.forEach(function (d) { if (d.open) { d.open = false; d.querySelector('summary').focus(); } });
+  });
+})();
+</script>
 
 </body>
 </html>
