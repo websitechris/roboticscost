@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robot maid cost 2026: chore robots to buy or subscribe</title>
+<meta name="description" content="What laundry-folding and chore robots cost in 2026, from Weave Isaac and Syncere Lume to 1X NEO, with a buy vs subscribe vs cleaner calculator.">
+<link rel="canonical" href="https://roboticscost.com/robot-maid-cost/">
+<meta property="og:title" content="Robot maid cost 2026: chore robots to buy or subscribe">
+<meta property="og:description" content="What laundry-folding and chore robots cost in 2026, from Weave Isaac and Syncere Lume to 1X NEO, with a buy vs subscribe vs cleaner calculator.">
+<meta property="og:url" content="https://roboticscost.com/robot-maid-cost/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<body>
+<header class="site-head"><div class="wrap"><a class="brand" href="/">robotics<span>cost</span></a><nav class="site-nav" aria-label="Main"><a href="/robot-lease-vs-buy-calculator/">Calculator</a><a href="/robotics-as-a-service/">Robotics as a service</a><a href="/how-we-calculate/">How we calculate</a></nav></div></header>
+<main class="wrap">
+<h1>Robot maid cost: what chore robots cost to buy or subscribe</h1>
+<p class="lede">You can now order a robot that folds laundry, tidies up or picks socks off the floor. Almost all of them make you choose between paying once and paying every month. Here is what each one costs, and a calculator that shows which way is cheaper for you, and how it compares with paying a cleaner.</p>
+<p class="note">Prices checked November 2026. Most of these robots are on pre-order or in early release, so check the maker's own page before you pay a deposit.</p>
+
+<div class="article" style="margin-top:28px">
+  <h2>Chore robot price list</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Robot</th><th>What it does</th><th>Buy</th><th>Subscribe</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1X NEO</strong></td><td>Humanoid that does general chores, partly by remote control while it learns</td><td>$20,000 ($200 refundable deposit)</td><td>$499 a month</td><td><a href="https://www.globenewswire.com/news-release/2026/04/30/3285118/0/en/1x-opens-neo-factory-in-hayward-ca-america-s-first-vertically-integrated-humanoid-robot-factory-with-consumer-shipments-planned-for-2026.html" target="_blank" rel="noopener">1X, Apr 2026</a></td></tr>
+      <tr><td><strong>Weave Isaac 1</strong></td><td>Folds laundry and tidies</td><td>$7,999, plus an optional $99 a month</td><td>$449 a month</td><td><a href="https://www.foxnews.com/tech/would-you-pay-8000-robot-fold-laundry" target="_blank" rel="noopener">Fox News, Jul 2026</a></td></tr>
+      <tr><td><strong>Syncere Lume</strong></td><td>Lamp-style robot arm that folds laundry</td><td>$2,699 (pair $5,199), plus $679 once for autonomy</td><td>Or $79 a month for autonomy instead of $679</td><td><a href="https://the-gadgeteer.com/2026/11/06/syncere-lume-robot-lamp-2699/" target="_blank" rel="noopener">The Gadgeteer, Nov 2026</a></td></tr>
+      <tr><td><strong>SwitchBot onero H1</strong></td><td>Home helper robot</td><td>$9,999 listed</td><td>None announced</td><td><a href="https://jetstream.blog/2026/04/13/switchbot-onero-h1-1600000-yen/" target="_blank" rel="noopener">Jetstream, Apr 2026</a></td></tr>
+      <tr><td><strong>Roborock Saros Z70</strong></td><td>Robot vacuum with an arm that picks up socks and small items</td><td>$2,599 list (often discounted)</td><td>None</td><td><a href="https://kotaku.com/the-most-advanced-robovac-with-a-mechanical-arm-is-1000-off-roborock-selling-off-all-inventory-2000621455" target="_blank" rel="noopener">Kotaku, Aug 2025</a></td></tr>
+      <tr><td><strong>Sunday Robotics Memo</strong></td><td>Tidying, laundry and clearing tables</td><td colspan="2">No public price found</td><td>None published</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Looking for humanoids such as Unitree or Tesla Optimus? See the <a href="/humanoid-robot-price/">humanoid robot price list</a>.</p>
+
+  <h2>Buy, subscribe, or pay a cleaner?</h2>
+  <p>Pick a robot or type in your own figures. The sums ignore interest, repairs and resale value, so treat them as a first look.</p>
+  <p>
+    <button type="button" class="preset" data-buy="20000" data-fee="0" data-sub="499">1X NEO</button>
+    <button type="button" class="preset" data-buy="7999" data-fee="99" data-sub="449">Weave Isaac 1</button>
+  </p>
+  <form class="mini-calc" id="mc" onsubmit="return false">
+    <p><label>Price to buy ($) <input type="number" id="mc-buy" value="7999" min="0" step="100" inputmode="decimal"></label></p>
+    <p><label>Monthly fee if you buy ($) <input type="number" id="mc-fee" value="99" min="0" step="1" inputmode="decimal"></label></p>
+    <p><label>Subscription per month ($) <input type="number" id="mc-sub" value="449" min="0" step="1" inputmode="decimal"></label></p>
+    <p><label>Years you would keep it <input type="number" id="mc-yrs" value="3" min="1" max="15" step="1" inputmode="numeric"></label></p>
+    <p><label>What you pay a cleaner a week, for the same jobs ($, optional) <input type="number" id="mc-clean" value="" min="0" step="5" inputmode="decimal" placeholder="Leave blank to skip"></label></p>
+  </form>
+  <div class="result" id="mc-out" aria-live="polite"></div>
+  <script>
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    var ids = ['mc-buy', 'mc-fee', 'mc-sub', 'mc-yrs', 'mc-clean'], out = $('mc-out');
+    function money(x) { return '$' + Math.round(x).toLocaleString('en-US'); }
+    function run() {
+      var buy = +$('mc-buy').value, fee = +$('mc-fee').value || 0, sub = +$('mc-sub').value, yrs = +$('mc-yrs').value, clean = $('mc-clean').value === '' ? null : +$('mc-clean').value;
+      if (!(buy >= 0) || !(sub >= 0) || !(yrs >= 1)) { out.textContent = 'Enter a price, a subscription and the years you would keep it.'; return; }
+      var m = yrs * 12, tBuy = buy + fee * m, tSub = sub * m, lines = [];
+      lines.push('Over ' + yrs + ' year' + (yrs > 1 ? 's' : '') + ': buying costs <strong>' + money(tBuy) + '</strong>, subscribing costs <strong>' + money(tSub) + '</strong>.');
+      if (sub > fee) {
+        var be = Math.ceil(buy / (sub - fee));
+        lines.push('Subscribing is cheaper if you keep it less than <strong>' + be + ' months (' + (be / 12).toFixed(1) + ' years)</strong>. After that, buying wins.');
+      } else {
+        lines.push('The subscription costs no more each month than owning, so subscribing stays cheaper however long you keep it.');
+      }
+      if (clean !== null && clean >= 0) {
+        var tClean = clean * 52 * yrs, best = Math.min(tBuy, tSub);
+        lines.push('A cleaner at ' + money(clean) + ' a week costs <strong>' + money(tClean) + '</strong> over the same time. ' + (tClean < best ? 'That is cheaper than the robot.' : 'The robot works out cheaper, if it really does the same jobs.'));
+      }
+      out.innerHTML = lines.map(function (l) { return '<p>' + l + '</p>'; }).join('');
+    }
+    ids.forEach(function (id) { $(id).addEventListener('input', run); });
+    Array.prototype.forEach.call(document.querySelectorAll('.preset'), function (b) {
+      b.addEventListener('click', function () { $('mc-buy').value = b.dataset.buy; $('mc-fee').value = b.dataset.fee; $('mc-sub').value = b.dataset.sub; run(); });
+    });
+    run();
+  })();
+  </script>
+  <p>Want the sum with interest, tax and resale value? Use the full <a href="/robot-lease-vs-buy-calculator/">robot lease vs buy calculator</a>.</p>
+
+  <h2>What the monthly fees pay for</h2>
+  <ul>
+    <li><strong>Weave Isaac 1:</strong> if you buy it, the optional $99 a month sits on top of the $7,999 price. The $449 a month plan replaces the purchase.</li>
+    <li><strong>Syncere Lume:</strong> the $2,699 robot needs an autonomy add-on to fold on its own: $679 once, or $79 a month. At those prices the one-off fee is cheaper after 9 months.</li>
+    <li><strong>1X NEO:</strong> $499 a month or $20,000. Renting is cheaper if you keep it less than about 3.4 years, before interest.</li>
+  </ul>
+
+  <h2>Questions to ask before you pay</h2>
+  <ol>
+    <li><strong>Does it still work if I stop paying the monthly fee?</strong> Some robots lose their "smart" features without it.</li>
+    <li><strong>Is a person watching or steering it remotely?</strong> Some home robots use remote operators for tasks they cannot yet do alone. Ask who sees your camera feed, and when.</li>
+    <li><strong>What happens if the company closes?</strong> Robots that rely on the maker's cloud can stop working. Ask whether it works offline.</li>
+    <li><strong>Is there a usage cap</strong> on loads, hours or tasks?</li>
+    <li><strong>What is the minimum term</strong>, and the cost of ending early?</li>
+    <li><strong>Who pays for repairs</strong> after the warranty?</li>
+  </ol>
+
+  <p class="note">This page is independent. No robot maker pays us or reviews our figures. Prices are as published by the sources linked, in US dollars, and may have changed.</p>
+</div>
+
+</main>
+<footer class="site-foot"><div class="wrap">
+<nav aria-label="Footer"><a href="/robot-lease-vs-buy-calculator/">Calculator</a><a href="/humanoid-robot-price/">Humanoid robot prices</a><a href="/robot-maid-cost/">Robot maid cost</a><a href="/robotaxi-cost/">Robotaxi cost</a><a href="/robotics-as-a-service/">Robotics as a service</a><a href="/how-we-calculate/">How we calculate</a><a href="/privacy/">Privacy</a></nav>
+<p>Independent and neutral. No maker, lessor or provider pays us. Figures are illustrations, not advice. Updated 2026-11-26.</p>
+</div></footer>
+
+</body>
+</html>
