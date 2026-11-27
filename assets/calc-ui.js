@@ -266,11 +266,23 @@
   form.querySelectorAll('[data-hours]').forEach(function (b) {
     b.addEventListener('click', function () { $('hoursPerYear').value = b.getAttribute('data-hours'); render(); });
   });
+  // "How fast does this kind of robot date?" sets the resale value, and follows it if the user types their own.
+  function syncPace() {
+    var v = $('resalePct').value.trim(), pace = $('techPace');
+    pace.value = (v === '20' || v === '5') ? v : 'custom';
+  }
+  $('techPace').addEventListener('change', function (e) {
+    var v = e.target.value;
+    if (v === 'custom') { $('showAdvanced').checked = true; setAdvanced(true); $('resalePct').focus(); return; }
+    $('resalePct').value = v; render();
+  });
+  $('resalePct').addEventListener('input', syncPace);
   $('resetBtn').addEventListener('click', function () {
     form.querySelectorAll('input, select').forEach(function (el) {
       if (el.id === 'showAdvanced') return;
       if (el.type === 'checkbox') el.checked = initial[el.id]; else el.value = initial[el.id];
     });
+    syncPace();
     render();
   });
   // Prefill from the link, e.g. ?taxRate=21&firstYearWriteOffPct=100 (values as typed in the form).
@@ -284,6 +296,7 @@
     });
     if (advNeeded) { $('showAdvanced').checked = true; setAdvanced(true); }
   } catch (e) { /* old browser: ignore */ }
+  syncPace();
   form.addEventListener('input', render);
   form.addEventListener('change', render);
   form.addEventListener('submit', function (e) { e.preventDefault(); });
