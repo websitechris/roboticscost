@@ -88,7 +88,7 @@
         rows.map(function (row) { return '<div><dt>' + row[0] + '</dt><dd' + (row[2] ? ' class="key"' : '') + '>' + row[1] + '</dd></div>'; }).join('') +
         '</dl></article>';
     }).join('');
-    $('routesNote').innerHTML = '<strong>Why the lowest can have the biggest cash total.</strong> \u201cTotal cash\u201d just adds up what you pay, minus what comes back (resale, tax relief). ' +
+    $('routesNote').innerHTML = '<strong>Why the lowest isn\u2019t always the smallest cash total.</strong> \u201cTotal cash\u201d just adds up what you pay, minus what comes back (resale, tax relief). ' +
       '\u201cCost in today\'s money\u201d also counts <em>when</em> you pay: at your ' + pct(o.costOfCapital) + ' cost of capital, money paid in later years costs you less than money paid on day one, because you keep the use of it in the meantime. ' +
       'That is the fair comparison, so the options are ranked on it.';
 
