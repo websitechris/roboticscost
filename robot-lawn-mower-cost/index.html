@@ -139,6 +139,24 @@
     d.addEventListener('toggle', function () { if (d.open) groups.forEach(function (o) { if (o !== d) o.open = false; }); });
   });
   document.addEventListener('click', function (e) { if (!nav.contains(e.target)) groups.forEach(function (d) { d.open = false; }); });
+  // Desktop with a mouse: open on hover, close after a short delay so the menu doesn't vanish mid-move.
+  var hoverOK = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 961px)');
+  groups.forEach(function (d) {
+    var timer, summary = d.querySelector('summary');
+    d.addEventListener('mouseenter', function () {
+      if (!hoverOK.matches) return;
+      clearTimeout(timer);
+      if (!d.open) { d.open = true; d.dataset.hover = '1'; }
+    });
+    d.addEventListener('mouseleave', function () {
+      if (!hoverOK.matches) return;
+      timer = setTimeout(function () { if (d.dataset.hover) { d.open = false; delete d.dataset.hover; } }, 400);
+    });
+    summary.addEventListener('click', function (e) {
+      // A click on a menu that hover already opened keeps it open (instead of shutting it).
+      if (d.dataset.hover) { e.preventDefault(); delete d.dataset.hover; }
+    });
+  });
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     groups.forEach(function (d) { if (d.open) { d.open = false; d.querySelector('summary').focus(); } });
