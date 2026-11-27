@@ -88,9 +88,28 @@
         rows.map(function (row) { return '<div><dt>' + row[0] + '</dt><dd' + (row[2] ? ' class="key"' : '') + '>' + row[1] + '</dd></div>'; }).join('') +
         '</dl></article>';
     }).join('');
-    $('routesNote').innerHTML = '<strong>Why the lowest isn\u2019t always the smallest cash total.</strong> \u201cTotal cash\u201d just adds up what you pay, minus what comes back (resale, tax relief). ' +
-      '\u201cCost in today\'s money\u201d also counts <em>when</em> you pay: at your ' + pct(o.costOfCapital) + ' cost of capital, money paid in later years costs you less than money paid on day one, because you keep the use of it in the meantime. ' +
-      'That is the fair comparison, so the options are ranked on it.';
+    // Plain-English "why" box, right under the verdict. Catches the case where the cheapest option
+    // has the bigger cash total, which looks back to front to anyone not used to discounting.
+    var NAMES = { buy: 'buying outright', hp: 'hire purchase', lease: 'leasing', raas: 'paying per result' };
+    var lowCash = ROUTES.slice().sort(function (p, q) { return r.routes[p].totalCash - r.routes[q].totalCash; })[0];
+    var why;
+    if (lowCash !== r.winner && r.routes[r.winner].totalCash > r.routes[lowCash].totalCash + 1) {
+      var W = r.routes[r.winner], L = r.routes[lowCash];
+      why = '<h3>Why ' + NAMES[r.winner] + ' comes out cheaper, even though you pay more in total</h3>' +
+        '<p>Add up the payments and ' + NAMES[lowCash] + ' looks cheaper: ' + fmt(L.totalCash) + ', against ' + fmt(W.totalCash) + ' for ' + NAMES[r.winner] + '. ' +
+        'But ' + NAMES[lowCash] + ' means handing over ' + fmt(L.dayOne) + ' on day one, while ' + NAMES[r.winner] + ' asks for ' + fmt(W.dayOne) + ' and spreads the rest over ' + o.termYears + ' years.</p>' +
+        '<p>Money you have not paid out yet can keep earning, or save you borrowing elsewhere. You told us your money is worth ' + pct(o.costOfCapital) + ' a year, and at that rate the delay is worth more than the extra you pay.';
+      var rate = r.winner === 'lease' ? r.leaseAPR : r.winner === 'hp' ? o.hpRate : null;
+      if (rate !== null && rate >= 0 && rate < o.costOfCapital && lowCash === 'buy') {
+        why += ' Put simply, the ' + (r.winner === 'lease' ? 'lease' : 'hire purchase') + ' is a loan at about ' + pct(rate) + ', which is cheaper than your money. If your money is worth less than that, for example savings earning 4%, buying will usually come out cheaper. Try it in “Your cost of capital”.';
+      }
+      why += '</p>';
+    } else {
+      why = '<h3>How we pick the cheapest</h3><p>We compare what each option costs you in today’s money: what you pay, adjusted for <em>when</em> you pay it. ' +
+        'Money paid in later years costs you less than money paid now, because you keep the use of it in the meantime. At the ' + pct(o.costOfCapital) + ' a year you entered for your money, that is how much less.</p>';
+    }
+    why += '<p class="why-links"><a href="/lease-or-buy-explained/">The simple explanation, with round numbers</a><span aria-hidden="true"> · </span>Full worked examples with tax: <a href="/tax/uk/#step-by-step">UK</a>, <a href="/tax/us/#step-by-step">US</a></p>';
+    $('routesNote').innerHTML = why;
 
     // Lease rate
     var apr = r.leaseAPR, lp = $('leasePanel');
