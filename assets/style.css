@@ -189,3 +189,15 @@ details summary { cursor: pointer; font-weight: 600; color: var(--accent); }
 .toc a { text-decoration: underline; }
 h2[id] { scroll-margin-top: 16px; }
 .routes-help { margin: 0; font-size: 1.05rem; font-weight: 600; }
+
+/* "Not published yet, we're tracking it" label for price gaps */
+.tracking { display: inline-block; padding: 2px 8px; border-radius: var(--radius); border-left: 3px solid var(--lease); background: var(--warn-bg); color: var(--ink); font-size: .92em; font-weight: 600; }
+
+/* Weekly email signup box (only shown once NEWSLETTER_USER is set in build.py) */
+.signup { margin-top: 40px; margin-bottom: 8px; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; max-width: 760px; }
+.signup h2 { margin-top: 0; }
+.signup-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0 6px; }
+.signup-form label { width: 100%; font-weight: 600; }
+.signup-form input[type=email] { flex: 1 1 240px; min-height: 48px; padding: 10px 12px; font-size: 1.1rem; border: 2px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--ink); }
+.signup-form button { min-height: 48px; padding: 10px 20px; font-size: 1.1rem; font-weight: 700; border: 0; border-radius: var(--radius); background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.signup .hint { color: var(--muted); font-size: .95rem; }
