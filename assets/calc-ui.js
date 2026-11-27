@@ -62,11 +62,14 @@
     var o = r.inputs, w = r.routes[r.winner], second = r.routes[r.ranked[1]];
     var close = r.margin < 0.02 * second.npv;
 
-    // Verdict
+    // Verdict, in plain words. Options are named as things you do ("leasing"), lower case mid-sentence.
+    var DOING = { buy: 'buying outright', hp: 'hire purchase', lease: 'leasing', raas: 'paying per result' };
+    var cap = function (t) { return t.charAt(0).toUpperCase() + t.slice(1); };
+    var a = DOING[r.winner], b = DOING[r.ranked[1]];
     $('verdict').innerHTML = close
-      ? '<p class="big">Too close to call: ' + esc(w.name) + ' and ' + esc(second.name) + ' are within ' + fmt(r.margin) + ' of each other over ' + o.termYears + ' years.</p>' +
-        '<p class="sub">A small change to your figures could reverse the answer. Look at what would flip it, below, and at the terms that matter to you beyond cost.</p>'
-      : '<p class="big">' + esc(w.name) + ' costs least: about ' + fmt(r.margin) + ' less than ' + esc(second.name.toLowerCase()) + ' over ' + o.termYears + ' years, in today\'s money.</p>' +
+      ? '<p class="big">' + cap(a) + ' and ' + b + ' cost almost the same: only ' + fmt(r.margin) + ' apart over ' + o.termYears + ' years, in today\'s money.</p>' +
+        '<p class="sub">' + cap(a) + ' is very slightly cheaper, but a small change to your figures could swap them. See \u201cWhat would change the answer\u201d below, and weigh up the terms that matter to you beyond cost.</p>'
+      : '<p class="big">' + cap(a) + ' costs least: about ' + fmt(r.margin) + ' less than ' + b + ' over ' + o.termYears + ' years, in today\'s money.</p>' +
         '<p class="sub">That is ' + fmt(w.costPerHour, 2) + ' per working hour, against ' + fmt(second.costPerHour, 2) + '.</p>';
 
     // Route cards
@@ -79,12 +82,15 @@
         ['Yearly equivalent cost', fmt(x.eac)],
         ['Cash needed on day one', fmt(x.dayOne)],
         k === 'hp' ? ['Monthly payment', fmt(r.hpPayment)] : k === 'lease' ? ['Monthly payment', fmt(o.leasePayment)] : null,
-        ['Total cash over the period', fmt(x.totalCash)]
+        ['Total cash, not adjusted for timing', fmt(x.totalCash)]
       ].filter(Boolean);
       return '<article class="route r-' + k + (win ? ' win' : '') + '"><h3>' + esc(x.name) + (win ? '<span class="badge">Lowest</span>' : '') + '</h3><dl>' +
         rows.map(function (row) { return '<div><dt>' + row[0] + '</dt><dd' + (row[2] ? ' class="key"' : '') + '>' + row[1] + '</dd></div>'; }).join('') +
         '</dl></article>';
     }).join('');
+    $('routesNote').innerHTML = '<strong>Why the lowest can have the biggest cash total.</strong> \u201cTotal cash\u201d just adds up what you pay, minus what comes back (resale, tax relief). ' +
+      '\u201cCost in today\'s money\u201d also counts <em>when</em> you pay: at your ' + pct(o.costOfCapital) + ' cost of capital, money paid in later years costs you less than money paid on day one, because you keep the use of it in the meantime. ' +
+      'That is the fair comparison, so the options are ranked on it.';
 
     // Lease rate
     var apr = r.leaseAPR, lp = $('leasePanel');
