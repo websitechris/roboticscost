@@ -183,3 +183,9 @@ details summary { cursor: pointer; font-weight: 600; color: var(--accent); }
 .explain-box { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: var(--radius); padding: 16px 18px; margin: 18px 0; font-size: 1.1rem; }
 .explain-box p { margin: 0 0 8px; }
 .explain-box p:last-child { margin-bottom: 0; }
+.toc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; margin: 18px 0 8px; max-width: 46rem; }
+.toc-title { margin: 0 0 6px; font-weight: 700; font-size: 1.05rem; }
+.toc ol { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; font-size: 1.05rem; }
+.toc a { text-decoration: underline; }
+h2[id] { scroll-margin-top: 16px; }
+.routes-help { margin: 0; font-size: 1.05rem; font-weight: 600; }

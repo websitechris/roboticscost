@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://roboticscost.com/how-we-calculate/">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/style.css?v=20261127c">
+<link rel="stylesheet" href="/assets/style.css?v=20261127d">
 
 </head>
 <body>
@@ -19,9 +19,10 @@
 <main class="wrap">
 <h1>How we calculate</h1>
 <p class="lede">The calculator puts every payment for each of the four options on a monthly timeline, converts it to today's money at your cost of capital, and compares the totals. Here is exactly how, and where the example figures come from.</p>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ol><li><a href="#the-method-in-five-steps">The method in five steps</a></li><li><a href="#formulas">Formulas</a></li><li><a href="#what-each-option-includes">What each option includes</a></li><li><a href="#tax-without-picking-a-country">Tax, without picking a country</a></li><li><a href="#where-the-example-figures-come-from">Where the example figures come from</a></li><li><a href="#limits">Limits</a></li><li><a href="#who-runs-this-site">Who runs this site</a></li></ol></nav>
 
 <div class="article" style="margin-top:28px">
-  <h2>The method in five steps</h2>
+  <h2 id="the-method-in-five-steps">The method in five steps</h2>
   <ol>
     <li><strong>Build each option's cash flows month by month</strong> over the period you choose. Month 0 is day one.</li>
     <li><strong>Discount them to today's money</strong> using your cost of capital, turned into a monthly rate. The result is the net present value (NPV) of the cost.</li>
@@ -30,14 +31,14 @@
     <li><strong>Test what would change the answer.</strong> We vary hours, resale value, cost of capital, price, hire purchase rate, lease payment, pay-per-result price and maintenance, and report the three nearest points at which a different option wins.</li>
   </ol>
 
-  <h2>Formulas</h2>
+  <h2 id="formulas">Formulas</h2>
   <p>Net present value of the cost, where C is the cost in month t, r the annual cost of capital and N the number of months:</p>
   <pre class="formula">NPV = Σ C(t) ÷ (1 + m)^t,   where m = (1 + r)^(1/12) − 1</pre>
   <p>Yearly equivalent cost over T years:</p>
   <pre class="formula">Yearly cost = NPV × r ÷ (1 − (1 + r)^−T)</pre>
   <p>The lease interest rate is the monthly rate at which the lease payments, fees and end-of-lease amount equal the robot's price, multiplied by 12 to give an APR. If you hand the robot back, its resale value counts as part of what you pay, because the lessor keeps it.</p>
 
-  <h2>What each option includes</h2>
+  <h2 id="what-each-option-includes">What each option includes</h2>
   <div class="table-scroll">
   <table>
     <thead><tr><th>Option</th><th>Costs counted</th><th>Money back</th></tr></thead>
@@ -50,10 +51,10 @@
   </table>
   </div>
 
-  <h2>Tax, without picking a country</h2>
+  <h2 id="tax-without-picking-a-country">Tax, without picking a country</h2>
   <p>Tax rules differ by country, so we ask for two numbers instead of assuming one country's rules: your tax rate, and the share of the purchase you can write off in year one. The rest is written off evenly over the remaining years. Running costs, lease payments and pay-per-result fees are deducted in the year they are paid. With hire purchase you own the robot, so it gets the same write-down as buying outright, and only the interest part of each payment is deducted. A lease gets no write-down on the robot itself. Tax relief arrives at the end of each year. Resale proceeds are taxed at the end. Grants are treated as reducing the cost and as not taxable. This is a simplification. Check the real treatment with your accountant.</p>
 
-  <h2>Where the example figures come from</h2>
+  <h2 id="where-the-example-figures-come-from">Where the example figures come from</h2>
   <p>The figures the calculator opens with are an illustration of a typical collaborative robot (cobot). They are not a quote. Replace them with your own.</p>
   <div class="table-scroll">
   <table>
@@ -72,7 +73,7 @@
   </table>
   </div>
 
-  <h2>Limits</h2>
+  <h2 id="limits">Limits</h2>
   <ul>
     <li>Running costs are flat over the period. In practice maintenance tends to rise as the robot ages.</li>
     <li>The lease runs for the same length as the comparison period.</li>
@@ -80,7 +81,7 @@
     <li>Payback uses your own labour-saving estimate and is not discounted.</li>
   </ul>
 
-  <h2>Who runs this site</h2>
+  <h2 id="who-runs-this-site">Who runs this site</h2>
   <p>roboticscost.com is independent and run by someone with a background in finance. No robot maker, lessor or service provider pays us, places adverts here, or reviews our figures. If you spot an error, we want to know.</p>
 </div>
 
