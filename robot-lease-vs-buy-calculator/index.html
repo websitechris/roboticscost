@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://roboticscost.com/robot-lease-vs-buy-calculator/">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/style.css?v=20261127c">
+<link rel="stylesheet" href="/assets/style.css?v=20261127d">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Robot lease vs buy calculator", "url": "https://roboticscost.com/robot-lease-vs-buy-calculator/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
 </head>
 <body>
@@ -20,8 +20,9 @@
 <h1>Robot lease vs buy calculator</h1>
 <p class="lede">Compare buying a robot outright, hire purchase, leasing, or paying per result (robotics as a service) on one fair basis: what each costs in today's money over the same period. The figures below are a worked example. Replace them with your own quotes.</p>
 <p class="lede-link">New to this kind of sum? Read <a href="/lease-or-buy-explained/">lease or buy, explained simply</a> first. It takes three minutes.</p>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ol><li><a href="#calculator">The calculator</a></li><li><a href="#how-to-read-the-result">How to read the result</a></li><li><a href="#hire-purchase-or-lease">Hire purchase or lease?</a></li><li><a href="#robot-leasing-the-questions-to-ask">Robot leasing: the questions to ask</a></li><li><a href="#what-sellers-rarely-mention">What sellers rarely mention</a></li></ol></nav>
 
-<div class="calc">
+<div class="calc" id="calculator">
   <form class="inputs" id="calc-form" novalidate>
     <fieldset>
       <legend>Your situation</legend>
@@ -214,6 +215,7 @@
     <div class="verdict" id="verdict"></div>
     <div class="routes-note" id="routesNote"></div>
     <div class="routes" id="routes"></div>
+    <p class="routes-help">What do these figures mean? <a href="#how-to-read-the-result">How to read the result</a></p>
     <div class="panel" id="leasePanel"></div>
     <div class="panel" id="flipsPanel"></div>
     <div class="panel">
@@ -234,14 +236,14 @@
 </div>
 
 <div class="article" style="margin-top:48px">
-  <h2>How to read the result</h2>
+  <h2 id="how-to-read-the-result">How to read the result</h2>
   <p>The main figure is the <strong>cost in today's money</strong>, also called net present value. A payment in year five costs you less than the same payment today, because you keep the money working in the meantime. Your cost of capital sets how much less. Adding up the cash instead flatters any option that pushes payments later.</p>
   <p><strong>Cost per working hour</strong> spreads that figure evenly over the years and divides by the hours the robot actually works, after downtime. It is the fairest single number for comparing with a wage or a quote priced by the hour.</p>
 
-  <h2>Hire purchase or lease?</h2>
+  <h2 id="hire-purchase-or-lease">Hire purchase or lease?</h2>
   <p>Both spread the cost over monthly payments. The difference is ownership. With <strong>hire purchase</strong> you own the robot once the last payment is made, so you keep its resale value and can usually claim grants and the tax write-down for buying equipment. With a <strong>lease</strong> the provider owns it. Compare the two interest rates first, then what you get at the end.</p>
 
-  <h2>Robot leasing: the questions to ask</h2>
+  <h2 id="robot-leasing-the-questions-to-ask">Robot leasing: the questions to ask</h2>
   <p>A lease is a loan in a different form. The provider buys the robot and you repay it monthly, with interest built in. Quotes usually show the payment and leave out the rate. The calculator works the rate out for you, including fees and payment timing.</p>
   <ul>
     <li><strong>What is the interest rate?</strong> Compare it with what your bank would charge to lend you the same money.</li>
@@ -250,7 +252,7 @@
     <li><strong>Can you end it early, and at what cost?</strong></li>
   </ul>
 
-  <h2>What sellers rarely mention</h2>
+  <h2 id="what-sellers-rarely-mention">What sellers rarely mention</h2>
   <ul>
     <li><strong>Hours of use decide most cases.</strong> Return-on-investment examples often assume two or three shifts. Try one shift and see what changes.</li>
     <li><strong>The robot is only part of the bill.</strong> Integration, tooling, guarding and training can add a large share again.</li>
@@ -303,7 +305,7 @@
   });
 })();
 </script>
-<script src="/assets/calc-core.js?v=20261127c"></script>
-<script src="/assets/calc-ui.js?v=20261127c"></script>
+<script src="/assets/calc-core.js?v=20261127d"></script>
+<script src="/assets/calc-ui.js?v=20261127d"></script>
 </body>
 </html>
